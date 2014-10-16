@@ -1,0 +1,6 @@
+#
+# for zabbix monitoring
+#
+Defaults:zabbix !requiretty
+#
+zabbix  ALL=(ALL)       NOPASSWD: /etc/zabbix/scripts/lxc.handler.pl *
