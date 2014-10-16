@@ -7,15 +7,6 @@
 # all parameters listed in /sys/fs/cgroup/lxc/ are returned
 #
 
-# give lxc name
-#sub get_vmname_by_id
-#  {
-#  $vmname=`cat /etc/qemu-server/$_[0].conf | grep name | cut -d \: -f 2`;
-#  $vmname =~ s/^\s+//; #remove leading spaces
-#  $vmname =~ s/\s+$//; #remove trailing spaces
-#  return $vmname
-#  }
-
 $first = 1;
 print "{\n";
 print "\t\"data\":[\n\n";
