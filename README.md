@@ -9,7 +9,14 @@ Templates were developed with Zabbix 2.0.x on CentOS 6 x86_64.
 B. Installation
 --
 
-TDB
+* copy file "zabbix-lxc.conf" into your zabbix-agent include folder
+
+* copy file "sudoers.d-zabbix-agent" into /etc/sudoers.d folder (and install sudo package)
+
+* copy scripts into /etc/zabbix/scripts folder (with 755 perms)
+
+* import xml file as template into your zabbix-server
+
 
 C. Monitored Items
 --
@@ -17,6 +24,8 @@ C. Monitored Items
 - through Discovery
 
 * PID of lxc container "{#NAME}"
+
+* STATE of lxc container "{#NAME}"
 
 D. License
 --
