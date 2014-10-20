@@ -4,10 +4,12 @@ Zabbix Template LXC
 A. Requirements
 --
 
-All this templates were tested for Zabbix 2.0.6 and higher (2.0.x).
+Templates were developed with Zabbix 2.0.x on CentOS 6 x86_64.
 
 B. Installation
 --
+
+TDB
 
 C. License
 --
