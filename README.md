@@ -11,12 +11,20 @@ B. Installation
 
 TDB
 
-C. License
+C. Monitored Items
+--
+
+- through Discovery
+
+* PID of lxc container "{#NAME}"
+
+D. License
 --
 
 This template were distributed under GNU General Public License 2.
 
-D. Docs
+E. Docs
+--
 
 * http://blog.docker.com/2013/10/gathering-lxc-docker-containers-metrics/
 
@@ -28,12 +36,12 @@ D. Docs
 
 * https://www.zabbix.com/forum/showthread.php?t=42426
 
-E. Copyright
+F. Copyright
 --
 
-Copyright (c) 2013-2014 Patrik Majer
-  
-F.  Authors
+Copyright (c) 2014 Patrik Majer
+
+G.  Authors
 --
 
 Patrik Majer
