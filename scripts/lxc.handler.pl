@@ -25,7 +25,27 @@ if($mode eq "PID"){
         }
      }
      else{
-        print STDERR "ERROR! Wrong input \"name\"\n";
+        print STDERR "ERROR! Wrong input \"name\" (PID)\n";
+        exit 2;
+    }
+
+}
+elsif($mode eq "STATE"){
+
+     if( $name =~ /^([a-z]|[A-Z]|[0-9]|_|-|\.)+$/ ){
+        $result = `lxc-info -n $name 2>&1`;
+        if ($result =~ m/state:([[:space:]]*)([A-Z]+)/){
+            print "$2\n";
+            exit 0;
+        }
+        else{
+            print STDERR "ERROR! Wront results (STATE)\n";
+            print STDERR "DEBUG: ".$result."\n";
+            exit 33;
+        }
+     }
+     else{
+        print STDERR "ERROR! Wrong input \"name\" (STATE)\n";
         exit 2;
     }
 
@@ -40,5 +60,4 @@ else{
  exit 1;
 
 }
-
 
