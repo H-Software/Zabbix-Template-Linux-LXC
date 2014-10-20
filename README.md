@@ -32,6 +32,8 @@ C. Monitored Items
 
 * STATE of lxc container "{#NAME}"
 
+* CPU acct (accumulated) - SYSTEM/USER - "{#NAME}"
+
 D. License
 --
 
