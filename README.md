@@ -4,8 +4,12 @@ Zabbix Template LXC
 A. Requirements
 --
 
-Templates were developed with Zabbix 2.0.x on Debian 7 x86_64 (turnkey linux).
+Templates were developed on:
 
+```
+Zabbix 2.0.x
+Debian 7 x86_64 (turnkey linux) with kernel 3.2.0 and LXC 0.8.0
+```
 
 B. Installation
 --
@@ -45,6 +49,8 @@ E. Docs
 * https://github.com/google/cadvisor
 
 * https://www.zabbix.com/forum/showthread.php?t=42426
+
+* https://github.com/ztmr/lxc-top
 
 F. Copyright
 --
