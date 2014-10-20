@@ -4,7 +4,8 @@ Zabbix Template LXC
 A. Requirements
 --
 
-Templates were developed with Zabbix 2.0.x on CentOS 6 x86_64.
+Templates were developed with Zabbix 2.0.x on Debian 7 x86_64 (turnkey linux).
+
 
 B. Installation
 --
