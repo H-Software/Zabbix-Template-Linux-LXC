@@ -1,10 +1,13 @@
 Zabbix Template LXC
 =========
 
-B. Requirements
+A. Requirements
 --
 
 All this templates were tested for Zabbix 2.0.6 and higher (2.0.x).
+
+B. Installation
+--
 
 C. License
 --
