@@ -60,6 +60,24 @@ elsif($mode eq "MEM-usage"){
 elsif($mode eq "MEM-max-usage"){
         (`cat /sys/fs/cgroup/lxc/$name/memory.max_usage_in_bytes 2>&1` =~ m/([0-9]+)/) ? print_result("$1") : print_error("ERROR! Wrong results");
 }
+elsif($mode eq "MEM-cache"){
+        (`cat /sys/fs/cgroup/lxc/$name/memory.stat 2>&1` =~ m/cache([[:space:]]*)([0-9]+)/) ? print_result("$2") : print_error("ERROR! Wrong results");
+}
+elsif($mode eq "MEM-rss"){
+        (`cat /sys/fs/cgroup/lxc/$name/memory.stat 2>&1` =~ m/rss([[:space:]]*)([0-9]+)/) ? print_result("$2") : print_error("ERROR! Wrong results");
+}
+elsif($mode eq "MEM-mapped_file"){
+        (`cat /sys/fs/cgroup/lxc/$name/memory.stat 2>&1` =~ m/mapped_file([[:space:]]*)([0-9]+)/) ? print_result("$2") : print_error("ERROR! Wrong results");
+}
+elsif($mode eq "MEM-swap"){
+        (`cat /sys/fs/cgroup/lxc/$name/memory.stat 2>&1` =~ m/swap([[:space:]]*)([0-9]+)/) ? print_result("$2") : print_error("ERROR! Wrong results");
+}
+elsif($mode eq "MEM-pgfault"){
+        (`cat /sys/fs/cgroup/lxc/$name/memory.stat 2>&1` =~ m/pgfault([[:space:]]*)([0-9]+)/) ? print_result("$2") : print_error("ERROR! Wrong results");
+}
+elsif($mode eq "MEM-pgmajfault"){
+        (`cat /sys/fs/cgroup/lxc/$name/memory.stat 2>&1` =~ m/pgmajfault([[:space:]]*)([0-9]+)/) ? print_result("$2") : print_error("ERROR! Wrong results");
+}
 elsif($mode eq "NEXT"){
 
 }

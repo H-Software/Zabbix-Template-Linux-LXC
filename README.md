@@ -38,6 +38,20 @@ through Discovery:
 
 * Memory Usage Max. of "{#NAME}"
 
+Memory advanced items:
+
+* Memory cache
+
+* Memory swap
+
+* Memory rss
+
+* Memory mapped_file
+
+* Memory pgfault
+
+* Memory pgmajfault
+
 
 D. License
 --
