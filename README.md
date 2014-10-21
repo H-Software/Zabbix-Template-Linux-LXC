@@ -26,13 +26,18 @@ B. Installation
 C. Monitored Items
 --
 
-- through Discovery
+through Discovery:
 
 * PID of lxc container "{#NAME}"
 
 * STATE of lxc container "{#NAME}"
 
 * CPU acct (accumulated) - SYSTEM/USER - "{#NAME}"
+
+* Memory Usage of "{#NAME}"
+
+* Memory Usage Max. of "{#NAME}"
+
 
 D. License
 --

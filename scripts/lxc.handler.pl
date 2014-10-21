@@ -54,6 +54,12 @@ elsif($mode eq "CPU-sys"){
 elsif($mode eq "CPU-user"){
         (`cat /sys/fs/cgroup/lxc/$name/cpuacct.stat 2>&1` =~ m/user([[:space:]]*)([0-9]+)/) ? print_result("$2") : print_result("0");
 }
+elsif($mode eq "MEM-usage"){
+        (`cat /sys/fs/cgroup/lxc/$name/memory.usage_in_bytes 2>&1` =~ m/([0-9]+)/) ? print_result("$1") : print_error("ERROR! Wrong results");
+}
+elsif($mode eq "MEM-max-usage"){
+        (`cat /sys/fs/cgroup/lxc/$name/memory.max_usage_in_bytes 2>&1` =~ m/([0-9]+)/) ? print_result("$1") : print_error("ERROR! Wrong results");
+}
 elsif($mode eq "NEXT"){
 
 }
