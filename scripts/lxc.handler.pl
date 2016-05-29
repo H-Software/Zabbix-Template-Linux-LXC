@@ -40,43 +40,69 @@ sub print_result {
 }
 
 #
+# check OS
+#
+@result = `ls /sys/fs/cgroup/lxc > /dev/null 2>&1`;
+
+if ( $? == -1 ){
+  #print "command failed: $!\n";
+}
+else {
+  # printf "command exited with value %d", $? >> 8;
+
+  if ( $? == 0 ){
+    #debian
+    our $workdir="/sys/fs/cgroup/lxc";
+  }
+  else {
+    # centos or another OS
+    if( $mode =~ /CPU-[user|sys]/ ){
+      our $workdir="/cgroup/cpuacct/lxc";
+    }
+    elsif( $mode =~ /MEM-/ ){
+      our $workdir="/cgroup/memory/lxc";
+    }
+  }
+}
+
+#
 # main loop
 #
 if($mode eq "PID"){
-        (`lxc-info -n $name 2>&1` =~ m/pid:([[:space:]]*)((-|[0-9])+)/) ? print_result("$2") : print_error("ERROR! Wront results");
+        (`lxc-info -n $name 2>&1` =~ m/[pid|PID]:([[:space:]]*)((-|[0-9])+)/) ? print_result("$2") : print_error("ERROR! Wront results");
 }
 elsif($mode eq "STATE"){
-        (`lxc-info -n $name 2>&1` =~ m/state:([[:space:]]*)([A-Z]+)/) ? print_result("$2") : print_error("ERROR! Wront results ");
+        (`lxc-info -n $name 2>&1` =~ m/[s|S]tate:([[:space:]]*)([A-Z]+)/) ? print_result("$2") : print_error("ERROR! Wront results ");
 }
 elsif($mode eq "CPU-sys"){
-        (`cat /sys/fs/cgroup/lxc/$name/cpuacct.stat 2>&1` =~ m/system([[:space:]]*)([0-9]+)/) ? print_result("$2") : print_result("0");
+        (`cat $workdir/$name/cpuacct.stat 2>&1` =~ m/system([[:space:]]*)([0-9]+)/) ? print_result("$2") : print_result("0");
 }
 elsif($mode eq "CPU-user"){
-        (`cat /sys/fs/cgroup/lxc/$name/cpuacct.stat 2>&1` =~ m/user([[:space:]]*)([0-9]+)/) ? print_result("$2") : print_result("0");
+        (`cat $workdir/$name/cpuacct.stat 2>&1` =~ m/user([[:space:]]*)([0-9]+)/) ? print_result("$2") : print_result("0");
 }
 elsif($mode eq "MEM-usage"){
-        (`cat /sys/fs/cgroup/lxc/$name/memory.usage_in_bytes 2>&1` =~ m/([0-9]+)/) ? print_result("$1") : print_error("ERROR! Wrong results");
+        (`cat $workdir/$name/memory.usage_in_bytes 2>&1` =~ m/([0-9]+)/) ? print_result("$1") : print_error("ERROR! Wrong results");
 }
 elsif($mode eq "MEM-max-usage"){
-        (`cat /sys/fs/cgroup/lxc/$name/memory.max_usage_in_bytes 2>&1` =~ m/([0-9]+)/) ? print_result("$1") : print_error("ERROR! Wrong results");
+        (`cat $workdir/$name/memory.max_usage_in_bytes 2>&1` =~ m/([0-9]+)/) ? print_result("$1") : print_error("ERROR! Wrong results");
 }
 elsif($mode eq "MEM-cache"){
-        (`cat /sys/fs/cgroup/lxc/$name/memory.stat 2>&1` =~ m/cache([[:space:]]*)([0-9]+)/) ? print_result("$2") : print_error("ERROR! Wrong results");
+        (`cat $workdir/$name/memory.stat 2>&1` =~ m/cache([[:space:]]*)([0-9]+)/) ? print_result("$2") : print_error("ERROR! Wrong results");
 }
 elsif($mode eq "MEM-rss"){
-        (`cat /sys/fs/cgroup/lxc/$name/memory.stat 2>&1` =~ m/rss([[:space:]]*)([0-9]+)/) ? print_result("$2") : print_error("ERROR! Wrong results");
+        (`cat $workdir/$name/memory.stat 2>&1` =~ m/rss([[:space:]]*)([0-9]+)/) ? print_result("$2") : print_error("ERROR! Wrong results");
 }
 elsif($mode eq "MEM-mapped_file"){
-        (`cat /sys/fs/cgroup/lxc/$name/memory.stat 2>&1` =~ m/mapped_file([[:space:]]*)([0-9]+)/) ? print_result("$2") : print_error("ERROR! Wrong results");
+        (`cat $workdir/$name/memory.stat 2>&1` =~ m/mapped_file([[:space:]]*)([0-9]+)/) ? print_result("$2") : print_error("ERROR! Wrong results");
 }
 elsif($mode eq "MEM-swap"){
-        (`cat /sys/fs/cgroup/lxc/$name/memory.stat 2>&1` =~ m/swap([[:space:]]*)([0-9]+)/) ? print_result("$2") : print_error("ERROR! Wrong results");
+        (`cat $workdir/$name/memory.stat 2>&1` =~ m/swap([[:space:]]*)([0-9]+)/) ? print_result("$2") : print_error("ERROR! Wrong results");
 }
 elsif($mode eq "MEM-pgfault"){
-        (`cat /sys/fs/cgroup/lxc/$name/memory.stat 2>&1` =~ m/pgfault([[:space:]]*)([0-9]+)/) ? print_result("$2") : print_error("ERROR! Wrong results");
+        (`cat $workdir/$name/memory.stat 2>&1` =~ m/pgfault([[:space:]]*)([0-9]+)/) ? print_result("$2") : print_error("ERROR! Wrong results");
 }
 elsif($mode eq "MEM-pgmajfault"){
-        (`cat /sys/fs/cgroup/lxc/$name/memory.stat 2>&1` =~ m/pgmajfault([[:space:]]*)([0-9]+)/) ? print_result("$2") : print_error("ERROR! Wrong results");
+        (`cat $workdir/$name/memory.stat 2>&1` =~ m/pgmajfault([[:space:]]*)([0-9]+)/) ? print_result("$2") : print_error("ERROR! Wrong results");
 }
 elsif($mode eq "NEXT"){
 
